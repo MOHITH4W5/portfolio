@@ -317,6 +317,24 @@ h2 {
     font-size: 1.05rem;
 }
 
+.coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.coming-soon .blink {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: softBlink 3s ease-in-out infinite;
+}
+
+@keyframes softBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
