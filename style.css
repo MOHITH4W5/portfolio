@@ -49,15 +49,22 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.15;
-    pointer-events: auto;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+#bg-3d::part(logo),
+#bg-3d #logo {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(var(--bg-primary), 0.95);
+    background: var(--bg-primary);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid var(--border);
@@ -158,12 +165,7 @@ nav {
     text-align: center;
     position: relative;
     padding: 6rem 1.5rem 4rem;
-    background: transparent;
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
+    background: var(--bg-secondary);
     z-index: 1;
 }
 
@@ -205,9 +207,13 @@ nav {
 
 section {
     padding: 5rem 1.5rem;
-    background: transparent;
+    background: var(--bg-primary);
     position: relative;
     z-index: 1;
+}
+
+section:nth-child(even) {
+    background: var(--bg-secondary);
 }
 
 .container {
@@ -376,7 +382,7 @@ h2 {
 footer {
     text-align: center;
     padding: 2rem 1rem;
-    background: transparent;
+    background: var(--bg-secondary);
     border-top: 1px solid var(--border);
     color: var(--text-secondary);
     position: relative;

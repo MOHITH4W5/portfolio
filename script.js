@@ -40,17 +40,28 @@ function toggleTheme() {
 
 function hideSplineLogo() {
     const viewer = document.getElementById('bg-3d');
-    if (viewer) {
-        viewer.addEventListener('load', () => {
-            setTimeout(() => {
-                const shadowRoot = viewer.shadowRoot;
-                if (shadowRoot) {
-                    const logo = shadowRoot.querySelector('#logo');
-                    if (logo) logo.style.display = 'none';
+    if (!viewer) return;
+    
+    const hideLogo = () => {
+        try {
+            const shadowRoot = viewer.shadowRoot;
+            if (shadowRoot) {
+                const logo = shadowRoot.querySelector('#logo');
+                if (logo) {
+                    logo.style.display = 'none';
+                    logo.style.visibility = 'hidden';
+                    logo.style.opacity = '0';
+                    logo.remove();
                 }
-            }, 100);
-        });
-    }
+            }
+        } catch (e) {}
+    };
+    
+    viewer.addEventListener('load', hideLogo);
+    setTimeout(hideLogo, 100);
+    setTimeout(hideLogo, 500);
+    setTimeout(hideLogo, 1000);
+    setInterval(hideLogo, 2000);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
