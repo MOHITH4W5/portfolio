@@ -53,21 +53,31 @@ async function init3DBackground() {
 }
 
 function addScrollAnimations() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
+    let time = 0;
+    setInterval(() => {
+        time += 0.05;
         
-        document.querySelectorAll('h1, h2, h3, p, .skill-card, .project-card, .about-img').forEach((el, index) => {
-            const speed = 0.5 + (index % 3) * 0.2;
-            const yPos = -(scrolled * speed * 0.1);
-            const xPos = (index % 2 === 0 ? 1 : -1) * (scrolled * 0.02);
+        document.querySelectorAll('h1, h2, h3').forEach((el, index) => {
+            const yPos = Math.sin(time + index) * 10;
+            el.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        document.querySelectorAll('.skill-card, .project-card').forEach((el, index) => {
+            const yPos = Math.sin(time + index * 0.5) * 15;
+            const xPos = Math.cos(time + index * 0.3) * 5;
             el.style.transform = `translate(${xPos}px, ${yPos}px)`;
         });
         
         document.querySelectorAll('.nav-links li').forEach((el, index) => {
-            const yPos = Math.sin(scrolled * 0.01 + index) * 5;
+            const yPos = Math.sin(time + index * 0.8) * 8;
             el.style.transform = `translateY(${yPos}px)`;
         });
-    });
+        
+        document.querySelectorAll('.about-img').forEach((el, index) => {
+            const yPos = Math.sin(time + index) * 12;
+            el.style.transform = `translateY(${yPos}px)`;
+        });
+    }, 50);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
