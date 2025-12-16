@@ -162,6 +162,14 @@ nav {
     z-index: 1;
 }
 
+spline-viewer::part(logo) {
+    display: none !important;
+}
+
+spline-viewer #logo {
+    display: none !important;
+}
+
 .hero-content h1 {
     font-size: clamp(2.5rem, 8vw, 4rem);
     margin-bottom: 1rem;
@@ -236,6 +244,10 @@ h2 {
     width: 100%;
     height: 100%;
     border-radius: 12px;
+}
+
+.robot-container spline-viewer::part(logo) {
+    display: none !important;
 }
 
 .about-img {
