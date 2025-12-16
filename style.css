@@ -104,16 +104,20 @@ body::before {
 
 @keyframes float {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(1);
     }
 }
 
 .menu-btn:hover {
+    animation: float 3s ease-in-out infinite;
     background: rgba(128, 128, 128, 0.5);
-    transform: scale(1.05);
+}
+
+.menu-btn:hover {
+    background: rgba(128, 128, 128, 0.5);
 }
 
 #canvas3d {
