@@ -42,7 +42,7 @@ body {
     position: relative;
 }
 
-#bg-3d {
+#canvas3d {
     position: fixed;
     top: 0;
     left: 0;
