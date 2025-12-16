@@ -39,8 +39,18 @@ function toggleTheme() {
 }
 
 function init3DBackground() {
+    console.log('Initializing 3D background...');
     const canvas = document.getElementById('bg-3d');
-    if (!canvas || !window.THREE) return;
+    console.log('Canvas:', canvas);
+    console.log('THREE:', window.THREE);
+    if (!canvas) {
+        console.error('Canvas not found!');
+        return;
+    }
+    if (!window.THREE) {
+        console.error('THREE.js not loaded!');
+        return;
+    }
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -95,6 +105,7 @@ function init3DBackground() {
         renderer.render(scene, camera);
     }
     animate();
+    console.log('3D background initialized successfully!');
 
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
