@@ -337,14 +337,19 @@ h2 {
 }
 
 .skill-card {
-    background: var(--bg-card);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
-    box-shadow: 0 4px 15px var(--shadow);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d;
     perspective: 1000px;
+}
+
+[data-theme="dark"] .skill-card {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .skill-card:hover {
@@ -354,15 +359,23 @@ h2 {
 }
 
 .skill-card h3 {
-    color: #ffffff;
+    color: #000000;
     margin-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
 .skill-card p {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(0, 0, 0, 0.8);
     font-size: 1.05rem;
+}
+
+[data-theme="dark"] .skill-card h3 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .skill-card p {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .coming-soon {
@@ -390,14 +403,19 @@ h2 {
 }
 
 .project-card {
-    background: var(--bg-card);
+    background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
-    box-shadow: 0 4px 15px var(--shadow);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d;
     perspective: 1000px;
+}
+
+[data-theme="dark"] .project-card {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .project-card:hover {
@@ -407,16 +425,24 @@ h2 {
 }
 
 .project-card h3 {
-    color: #ffffff;
+    color: #000000;
     margin-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
 .project-card p {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(0, 0, 0, 0.8);
     margin-bottom: 1.5rem;
     line-height: 1.7;
+}
+
+[data-theme="dark"] .project-card h3 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .project-card p {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .project-link {
