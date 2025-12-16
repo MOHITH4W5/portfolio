@@ -533,10 +533,31 @@ footer * {
     .menu-btn {
         top: 1rem;
         right: 1rem;
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
-        z-index: 2000;
+        width: 45px;
+        height: 45px;
+        z-index: 10001;
+    }
+    
+    .menu-btn span {
+        width: 22px;
+    }
+    
+    .dropdown-menu {
+        width: 250px;
+        right: -300px;
+    }
+    
+    .dropdown-menu.active {
+        right: 0;
+    }
+    
+    .nav-links {
+        padding: 6rem 2rem 2rem;
+        gap: 2rem;
+    }
+    
+    .nav-links a {
+        font-size: 1.1rem;
     }
     
     .nav-right {
