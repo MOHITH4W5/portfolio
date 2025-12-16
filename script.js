@@ -44,7 +44,7 @@ async function init3DBackground() {
 }
 
 function toggleMenu() {
-    const menu = document.querySelector('.dropdown-menu');
+    const menu = document.getElementById('dropdownMenu');
     menu.classList.toggle('active');
 }
 
@@ -52,17 +52,23 @@ window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
     init3DBackground();
     
-    const menuBtn = document.querySelector('.menu-btn');
-    menuBtn.addEventListener('click', toggleMenu);
-    menuBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMenu();
-    }, { passive: false });
+    const menuBtn = document.getElementById('menuBtn');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+        menuBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        }, { passive: false });
+    }
     
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
-            document.querySelector('.dropdown-menu').classList.remove('active');
+            document.getElementById('dropdownMenu').classList.remove('active');
         });
     });
     document.documentElement.setAttribute('data-theme', 'dark');

@@ -85,12 +85,12 @@ body::before {
     position: fixed;
     top: 2rem;
     right: 2rem;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     z-index: 10000;
     transition: all 0.3s;
@@ -102,15 +102,17 @@ body::before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
+    padding: 0;
 }
 
 .menu-btn span {
-    width: 30px;
-    height: 3px;
+    width: 22px;
+    height: 2px;
     background: #ffffff;
     border-radius: 2px;
     transition: all 0.3s;
+    pointer-events: none;
 }
 
 .menu-btn:hover {
