@@ -218,11 +218,6 @@ canvas + div {
     padding: 2rem 1.5rem;
     background: transparent;
     z-index: 1;
-    pointer-events: none;
-}
-
-.hero * {
-    pointer-events: auto;
 }
 
 
