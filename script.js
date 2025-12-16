@@ -52,9 +52,28 @@ async function init3DBackground() {
     }, 100);
 }
 
+function addScrollAnimations() {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        
+        document.querySelectorAll('h1, h2, h3, p, .skill-card, .project-card, .about-img').forEach((el, index) => {
+            const speed = 0.5 + (index % 3) * 0.2;
+            const yPos = -(scrolled * speed * 0.1);
+            const xPos = (index % 2 === 0 ? 1 : -1) * (scrolled * 0.02);
+            el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        });
+        
+        document.querySelectorAll('.nav-links li').forEach((el, index) => {
+            const yPos = Math.sin(scrolled * 0.01 + index) * 5;
+            el.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
     init3DBackground();
+    addScrollAnimations();
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');
