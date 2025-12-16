@@ -53,6 +53,7 @@ body::before {
     background: rgba(0, 0, 0, 0.1);
     z-index: -1;
     transition: background 0.5s ease;
+    pointer-events: none;
 }
 
 [data-theme="dark"] body::before {
