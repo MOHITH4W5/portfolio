@@ -52,9 +52,21 @@ async function init3DBackground() {
     }, 100);
 }
 
+function toggleMenu() {
+    const menu = document.querySelector('.dropdown-menu');
+    menu.classList.toggle('active');
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
     init3DBackground();
+    
+    document.querySelector('.menu-btn').addEventListener('click', toggleMenu);
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.dropdown-menu').classList.remove('active');
+        });
+    });
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');
