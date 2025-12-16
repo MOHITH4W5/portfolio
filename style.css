@@ -149,26 +149,7 @@ nav {
     background: var(--bg-secondary);
 }
 
-.hero spline-viewer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
 
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-spline-viewer::part(logo) {
-    display: none !important;
-}
-
-spline-viewer #logo {
-    display: none !important;
-}
 
 .hero-content h1 {
     font-size: clamp(2.5rem, 8vw, 4rem);
@@ -234,25 +215,32 @@ h2 {
     justify-content: center;
 }
 
-.robot-container {
+.profile-3d-container {
+    position: relative;
     width: 300px;
     height: 300px;
     flex-shrink: 0;
 }
 
-.robot-container spline-viewer {
+.profile-3d-container spline-viewer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.robot-container spline-viewer::part(logo) {
-    display: none !important;
+.profile-3d-container .about-img {
+    position: relative;
+    z-index: 0;
+    opacity: 0.3;
 }
 
 .about-img {
-    width: 220px;
-    height: 220px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid var(--accent);
@@ -261,7 +249,7 @@ h2 {
     box-shadow: 0 10px 30px var(--shadow);
 }
 
-.about-img:hover {
+.profile-3d-container:hover .about-img {
     transform: scale(1.05);
 }
 
@@ -399,7 +387,12 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .robot-container {
+    .profile-3d-container {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .about-img {
         width: 250px;
         height: 250px;
     }

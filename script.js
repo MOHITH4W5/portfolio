@@ -38,8 +38,24 @@ function toggleTheme() {
     toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
 }
 
+function hideSplineLogo() {
+    const viewer = document.getElementById('profile-3d');
+    if (viewer) {
+        viewer.addEventListener('load', () => {
+            setTimeout(() => {
+                const shadowRoot = viewer.shadowRoot;
+                if (shadowRoot) {
+                    const logo = shadowRoot.querySelector('#logo');
+                    if (logo) logo.style.display = 'none';
+                }
+            }, 100);
+        });
+    }
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
+    hideSplineLogo();
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');
