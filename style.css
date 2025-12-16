@@ -496,6 +496,17 @@ footer * {
     
     .logo {
         font-size: 1.2rem;
+        top: 1rem;
+        left: 1rem;
+        padding: 0.3rem 1rem;
+    }
+    
+    .menu-btn {
+        top: 1rem;
+        right: 1rem;
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
     }
     
     .nav-right {
