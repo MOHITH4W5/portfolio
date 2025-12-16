@@ -27,16 +27,7 @@ function add3DCardEffects() {
     });
 }
 
-function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    const toggleBtn = document.querySelector('.theme-toggle');
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-}
+
 
 async function init3DBackground() {
     const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
@@ -67,17 +58,7 @@ window.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.dropdown-menu').classList.remove('active');
         });
     });
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    const toggleBtn = document.querySelector('.theme-toggle');
-    if (toggleBtn) {
-        toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-        toggleBtn.addEventListener('click', toggleTheme);
-        toggleBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            toggleTheme();
-        });
-    }
+    document.documentElement.setAttribute('data-theme', 'dark');
     
 
 });
