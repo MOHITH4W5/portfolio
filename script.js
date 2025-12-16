@@ -52,13 +52,17 @@ window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
     init3DBackground();
     
-    document.querySelector('.menu-btn').addEventListener('click', toggleMenu);
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', toggleMenu);
+    menuBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        toggleMenu();
+    });
+    
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             document.querySelector('.dropdown-menu').classList.remove('active');
         });
     });
     document.documentElement.setAttribute('data-theme', 'dark');
-    
-
 });
