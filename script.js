@@ -39,7 +39,7 @@ function toggleTheme() {
 }
 
 function hideSplineLogo() {
-    const viewer = document.getElementById('profile-3d');
+    const viewer = document.getElementById('bg-3d');
     if (viewer) {
         viewer.addEventListener('load', () => {
             setTimeout(() => {
