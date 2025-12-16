@@ -150,40 +150,40 @@ canvas + div {
 
 .dropdown-menu {
     position: fixed;
-    top: 0;
-    right: -200px;
+    top: -100%;
+    right: 2rem;
     width: 150px;
-    height: 100vh;
+    max-height: 0;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
     z-index: 9999;
-    transition: right 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: auto;
+    overflow: hidden;
 }
 
 .dropdown-menu.active {
-    right: 0;
-    animation: clothFall 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    top: 5rem;
+    max-height: 400px;
+    animation: fallDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes clothFall {
+@keyframes fallDown {
     0% {
-        right: -200px;
-        transform: rotateY(90deg) translateX(50px);
+        top: -100%;
         opacity: 0;
+        transform: translateY(-20px) rotateX(-15deg);
     }
-    40% {
-        transform: rotateY(-8deg) translateX(-10px);
-        opacity: 0.8;
-    }
-    70% {
-        transform: rotateY(3deg) translateX(5px);
+    60% {
+        transform: translateY(10px) rotateX(5deg);
+        opacity: 0.9;
     }
     100% {
-        right: 0;
-        transform: rotateY(0deg) translateX(0);
+        top: 5rem;
         opacity: 1;
+        transform: translateY(0) rotateX(0deg);
     }
 }
 
@@ -544,27 +544,7 @@ footer * {
     
     .dropdown-menu {
         width: 250px;
-        right: -300px;
-    }
-    
-    @keyframes clothFall {
-        0% {
-            right: -300px;
-            transform: rotateY(90deg) translateX(50px);
-            opacity: 0;
-        }
-        40% {
-            transform: rotateY(-8deg) translateX(-10px);
-            opacity: 0.8;
-        }
-        70% {
-            transform: rotateY(3deg) translateX(5px);
-        }
-        100% {
-            right: 0;
-            transform: rotateY(0deg) translateX(0);
-            opacity: 1;
-        }
+        right: 1rem;
     }
     
     .nav-links {
