@@ -124,10 +124,6 @@ nav {
     gap: 1.5rem;
 }
 
-.nav-links li {
-    transition: transform 0.1s ease-out;
-}
-
 .nav-links a {
     color: var(--text-primary);
     text-decoration: none;
@@ -237,10 +233,6 @@ section {
     margin: 0 auto;
 }
 
-h1, h2, h3, p {
-    transition: transform 0.1s ease-out;
-}
-
 h2 {
     font-size: clamp(2.5rem, 6vw, 3.5rem);
     text-align: center;
@@ -301,7 +293,7 @@ h2 {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--border);
-    transition: all 0.3s, transform 0.1s ease-out;
+    transition: all 0.3s;
     box-shadow: 0 4px 15px var(--shadow);
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -336,7 +328,7 @@ h2 {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--border);
-    transition: all 0.3s, transform 0.1s ease-out;
+    transition: all 0.3s;
     box-shadow: 0 4px 15px var(--shadow);
     transform-style: preserve-3d;
     perspective: 1000px;

@@ -52,38 +52,9 @@ async function init3DBackground() {
     }, 100);
 }
 
-function addScrollAnimations() {
-    let time = 0;
-    setInterval(() => {
-        time += 0.05;
-        
-        document.querySelectorAll('h1, h2, h3').forEach((el, index) => {
-            const yPos = Math.sin(time + index) * 10;
-            el.style.transform = `translateY(${yPos}px)`;
-        });
-        
-        document.querySelectorAll('.skill-card, .project-card').forEach((el, index) => {
-            const yPos = Math.sin(time + index * 0.5) * 15;
-            const xPos = Math.cos(time + index * 0.3) * 5;
-            el.style.transform = `translate(${xPos}px, ${yPos}px)`;
-        });
-        
-        document.querySelectorAll('.nav-links li').forEach((el, index) => {
-            const yPos = Math.sin(time + index * 0.8) * 8;
-            el.style.transform = `translateY(${yPos}px)`;
-        });
-        
-        document.querySelectorAll('.about-img').forEach((el, index) => {
-            const yPos = Math.sin(time + index) * 12;
-            el.style.transform = `translateY(${yPos}px)`;
-        });
-    }, 50);
-}
-
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
     init3DBackground();
-    addScrollAnimations();
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');
