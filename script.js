@@ -43,9 +43,11 @@ async function init3DBackground() {
     if (!canvas) return;
     
     try {
+        console.log('Loading 3D model...');
         const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
         const app = new Application(canvas);
-        await app.load('https://prod.spline.design/sgT2rkSBhOAB63MU/scene.splinecode');
+        app.load('https://prod.spline.design/sgT2rkSBhOAB63MU/scene.splinecode');
+        console.log('3D model loaded successfully!');
     } catch (error) {
         console.error('Failed to load 3D:', error);
     }
