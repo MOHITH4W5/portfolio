@@ -54,10 +54,11 @@ window.addEventListener('DOMContentLoaded', function() {
     
     const menuBtn = document.querySelector('.menu-btn');
     menuBtn.addEventListener('click', toggleMenu);
-    menuBtn.addEventListener('touchend', function(e) {
+    menuBtn.addEventListener('touchstart', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         toggleMenu();
-    });
+    }, { passive: false });
     
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
