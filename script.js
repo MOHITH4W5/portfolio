@@ -38,52 +38,74 @@ function toggleTheme() {
     toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
 }
 
-function hideSplineLogo() {
-    const viewer = document.getElementById('bg-3d');
-    if (!viewer) return;
+function init3DBackground() {
+    const canvas = document.getElementById('bg-3d');
+    if (!canvas || !window.THREE) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     
-    const hideLogo = () => {
-        try {
-            const shadowRoot = viewer.shadowRoot;
-            if (shadowRoot) {
-                let style = shadowRoot.querySelector('#hide-logo-style');
-                if (!style) {
-                    style = document.createElement('style');
-                    style.id = 'hide-logo-style';
-                    style.textContent = `
-                        #logo {
-                            display: none !important;
-                            visibility: hidden !important;
-                            opacity: 0 !important;
-                            width: 0 !important;
-                            height: 0 !important;
-                            position: absolute !important;
-                            left: -9999px !important;
-                        }
-                    `;
-                    shadowRoot.appendChild(style);
-                }
-                const logo = shadowRoot.querySelector('#logo');
-                if (logo) {
-                    logo.style.cssText = 'display: none !important; visibility: hidden !important; opacity: 0 !important;';
-                    logo.remove();
-                }
-            }
-        } catch (e) {}
-    };
-    
-    viewer.addEventListener('load', hideLogo);
-    setTimeout(hideLogo, 50);
-    setTimeout(hideLogo, 200);
-    setTimeout(hideLogo, 500);
-    setTimeout(hideLogo, 1000);
-    setTimeout(hideLogo, 2000);
-    setInterval(hideLogo, 3000);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
+
+    const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+    const material = new THREE.MeshStandardMaterial({ 
+        color: 0x2563eb,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.6
+    });
+    const torusKnot = new THREE.Mesh(geometry, material);
+    scene.add(torusKnot);
+
+    const particles = [];
+    for (let i = 0; i < 100; i++) {
+        const geo = new THREE.SphereGeometry(0.05, 8, 8);
+        const mat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.6 });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20);
+        particles.push(mesh);
+        scene.add(mesh);
+    }
+
+    const light1 = new THREE.PointLight(0xffffff, 1);
+    light1.position.set(5, 5, 5);
+    scene.add(light1);
+
+    const light2 = new THREE.AmbientLight(0x404040);
+    scene.add(light2);
+
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        torusKnot.rotation.x += 0.005;
+        torusKnot.rotation.y += 0.01;
+        particles.forEach((p, i) => {
+            p.position.y += Math.sin(Date.now() * 0.001 + i) * 0.002;
+        });
+        camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 }
 
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
-    hideSplineLogo();
+    init3DBackground();
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');

@@ -49,20 +49,6 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.2;
-    pointer-events: auto;
-}
-
-#bg-3d * {
-    pointer-events: auto !important;
-}
-
-#bg-3d::part(logo) {
-    display: none !important;
-}
-
-#bg-3d iframe {
-    pointer-events: auto !important;
 }
 
 nav {
