@@ -145,6 +145,7 @@ canvas + div {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
     transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
 }
 
 .dropdown-menu.active {
@@ -185,6 +186,7 @@ canvas + div {
     font-weight: 600;
     font-size: 1.2rem;
     display: block;
+    pointer-events: auto;
 }
 
 .nav-links a:hover {
