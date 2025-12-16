@@ -38,8 +38,16 @@ function toggleTheme() {
     toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
 }
 
+async function init3DBackground() {
+    const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
+    const canvas = document.getElementById('canvas3d');
+    const app = new Application(canvas);
+    app.load('https://prod.spline.design/R73ukMpU1cz91-xF/scene.splinecode');
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     add3DCardEffects();
+    init3DBackground();
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const toggleBtn = document.querySelector('.theme-toggle');
