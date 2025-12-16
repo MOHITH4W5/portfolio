@@ -112,6 +112,7 @@ body::before {
     border: none;
     filter: brightness(1.2) contrast(1.1);
     transition: filter 0.5s ease;
+    pointer-events: auto;
 }
 
 [data-theme="dark"] #canvas3d {
