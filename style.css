@@ -243,7 +243,11 @@ canvas + div {
     pointer-events: none;
 }
 
-.hero * {
+.hero-content {
+    pointer-events: none;
+}
+
+.hero-content * {
     pointer-events: auto;
 }
 
@@ -306,6 +310,11 @@ section * {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    pointer-events: none;
+}
+
+.container * {
+    pointer-events: auto;
 }
 
 h2 {
