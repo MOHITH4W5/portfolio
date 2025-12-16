@@ -46,11 +46,26 @@ function hideSplineLogo() {
         try {
             const shadowRoot = viewer.shadowRoot;
             if (shadowRoot) {
+                let style = shadowRoot.querySelector('#hide-logo-style');
+                if (!style) {
+                    style = document.createElement('style');
+                    style.id = 'hide-logo-style';
+                    style.textContent = `
+                        #logo {
+                            display: none !important;
+                            visibility: hidden !important;
+                            opacity: 0 !important;
+                            width: 0 !important;
+                            height: 0 !important;
+                            position: absolute !important;
+                            left: -9999px !important;
+                        }
+                    `;
+                    shadowRoot.appendChild(style);
+                }
                 const logo = shadowRoot.querySelector('#logo');
                 if (logo) {
-                    logo.style.display = 'none';
-                    logo.style.visibility = 'hidden';
-                    logo.style.opacity = '0';
+                    logo.style.cssText = 'display: none !important; visibility: hidden !important; opacity: 0 !important;';
                     logo.remove();
                 }
             }
@@ -58,10 +73,12 @@ function hideSplineLogo() {
     };
     
     viewer.addEventListener('load', hideLogo);
-    setTimeout(hideLogo, 100);
+    setTimeout(hideLogo, 50);
+    setTimeout(hideLogo, 200);
     setTimeout(hideLogo, 500);
     setTimeout(hideLogo, 1000);
-    setInterval(hideLogo, 2000);
+    setTimeout(hideLogo, 2000);
+    setInterval(hideLogo, 3000);
 }
 
 window.addEventListener('DOMContentLoaded', function() {

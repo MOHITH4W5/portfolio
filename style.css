@@ -50,14 +50,19 @@ body {
     height: 100%;
     z-index: 0;
     opacity: 0.2;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
-#bg-3d::part(logo),
-#bg-3d #logo {
+#bg-3d * {
+    pointer-events: auto !important;
+}
+
+#bg-3d::part(logo) {
     display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+}
+
+#bg-3d iframe {
+    pointer-events: auto !important;
 }
 
 nav {
@@ -67,6 +72,7 @@ nav {
     background: var(--bg-primary);
     backdrop-filter: blur(10px);
     z-index: 1000;
+    pointer-events: auto;
     border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 10px var(--shadow);
     transition: all 0.3s;
@@ -167,6 +173,11 @@ nav {
     padding: 6rem 1.5rem 4rem;
     background: var(--bg-secondary);
     z-index: 1;
+    pointer-events: none;
+}
+
+.hero * {
+    pointer-events: auto;
 }
 
 
@@ -210,6 +221,7 @@ section {
     background: var(--bg-primary);
     position: relative;
     z-index: 1;
+    pointer-events: auto;
 }
 
 section:nth-child(even) {
@@ -387,6 +399,7 @@ footer {
     color: var(--text-secondary);
     position: relative;
     z-index: 1;
+    pointer-events: auto;
 }
 
 @media (max-width: 768px) {
