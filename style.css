@@ -164,6 +164,7 @@ canvas + div {
 
 .dropdown-menu.active {
     max-height: 500px;
+    overflow: visible;
     animation: waterFlow 0.8s ease-out;
 }
 
