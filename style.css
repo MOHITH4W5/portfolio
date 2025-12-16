@@ -52,6 +52,14 @@ body {
     border: none;
 }
 
+#canvas3d + div[style*="position: absolute"] {
+    display: none !important;
+}
+
+canvas + div {
+    display: none !important;
+}
+
 nav {
     position: fixed;
     top: 0;

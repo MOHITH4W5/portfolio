@@ -42,7 +42,14 @@ async function init3DBackground() {
     const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
     const canvas = document.getElementById('canvas3d');
     const app = new Application(canvas);
-    app.load('https://prod.spline.design/R73ukMpU1cz91-xF/scene.splinecode');
+    await app.load('https://prod.spline.design/R73ukMpU1cz91-xF/scene.splinecode');
+    
+    setInterval(() => {
+        const logo = document.querySelector('div[style*="position: absolute"]');
+        if (logo && logo.textContent.includes('Spline')) {
+            logo.style.display = 'none';
+        }
+    }, 100);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
