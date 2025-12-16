@@ -547,8 +547,24 @@ footer * {
         right: -300px;
     }
     
-    .dropdown-menu.active {
-        right: 0;
+    @keyframes clothFall {
+        0% {
+            right: -300px;
+            transform: rotateY(90deg) translateX(50px);
+            opacity: 0;
+        }
+        40% {
+            transform: rotateY(-8deg) translateX(-10px);
+            opacity: 0.8;
+        }
+        70% {
+            transform: rotateY(3deg) translateX(5px);
+        }
+        100% {
+            right: 0;
+            transform: rotateY(0deg) translateX(0);
+            opacity: 1;
+        }
     }
     
     .nav-links {
