@@ -6,6 +6,7 @@
     <title>Mohith - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.18/build/spline-viewer.js"></script>
 </head>
 <body>
     <nav>
@@ -40,7 +41,9 @@
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
-                <img src="profile.jpg" alt="Profile" class="about-img">
+                <div class="robot-container">
+                    <spline-viewer url="https://prod.spline.design/VOkhrGVOfJirDSsK/scene.splinecode"></spline-viewer>
+                </div>
                 <div class="about-text">
                     <p>I'm a passionate developer with expertise in creating modern web applications. I love turning ideas into reality through code.</p>
                     <p>With experience in full-stack development, I focus on building responsive and user-friendly applications.</p>
