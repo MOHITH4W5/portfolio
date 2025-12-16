@@ -39,18 +39,10 @@ function toggleTheme() {
 }
 
 async function init3DBackground() {
+    const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
     const canvas = document.getElementById('canvas3d');
-    if (!canvas) return;
-    
-    try {
-        console.log('Loading 3D model...');
-        const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
-        const app = new Application(canvas);
-        app.load('https://prod.spline.design/sgT2rkSBhOAB63MU/scene.splinecode');
-        console.log('3D model loaded successfully!');
-    } catch (error) {
-        console.error('Failed to load 3D:', error);
-    }
+    const app = new Application(canvas);
+    app.load('loading...');
 }
 
 window.addEventListener('DOMContentLoaded', function() {
