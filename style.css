@@ -157,9 +157,13 @@ nav {
     text-align: center;
     position: relative;
     padding: 6rem 1.5rem 4rem;
-    background: var(--bg-secondary);
+    background: rgba(248, 249, 250, 0.7);
     z-index: 1;
     pointer-events: none;
+}
+
+[data-theme="dark"] .hero {
+    background: rgba(17, 17, 17, 0.7);
 }
 
 .hero * {
@@ -204,14 +208,22 @@ nav {
 
 section {
     padding: 5rem 1.5rem;
-    background: var(--bg-primary);
+    background: rgba(255, 255, 255, 0.8);
     position: relative;
     z-index: 1;
     pointer-events: auto;
 }
 
 section:nth-child(even) {
-    background: var(--bg-secondary);
+    background: rgba(248, 249, 250, 0.8);
+}
+
+[data-theme="dark"] section {
+    background: rgba(10, 10, 10, 0.8);
+}
+
+[data-theme="dark"] section:nth-child(even) {
+    background: rgba(17, 17, 17, 0.8);
 }
 
 .container {
@@ -380,12 +392,16 @@ h2 {
 footer {
     text-align: center;
     padding: 2rem 1rem;
-    background: var(--bg-secondary);
+    background: rgba(248, 249, 250, 0.8);
     border-top: 1px solid var(--border);
     color: var(--text-secondary);
     position: relative;
     z-index: 1;
     pointer-events: auto;
+}
+
+[data-theme="dark"] footer {
+    background: rgba(17, 17, 17, 0.8);
 }
 
 @media (max-width: 768px) {
