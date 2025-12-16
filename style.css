@@ -99,6 +99,16 @@ body::before {
     pointer-events: auto;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .menu-btn:hover {
