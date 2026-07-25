@@ -69,6 +69,17 @@
             return;
         }
 
+        if (window.location.protocol === "file:") {
+            addMessage({ role: "user", content: message, sources: [] });
+            input.value = "";
+            addMessage({
+                role: "assistant",
+                content: "Open this portfolio from GitHub Pages or a local server, not directly as a file. For local testing, run `python -m http.server 8000` in the portfolio folder and open `http://127.0.0.1:8000`.",
+                sources: []
+            });
+            return;
+        }
+
         addMessage({ role: "user", content: message, sources: [] });
         input.value = "";
         setLoading(true);
