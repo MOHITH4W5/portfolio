@@ -1,0 +1,9 @@
+{
+  "name": "mohith-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ingest:knowledge": "node scripts/ingest-knowledge.js"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+worker/node_modules/
+worker/dist/
+worker/.wrangler/
+worker/wrangler.toml
+.env
+.env.*

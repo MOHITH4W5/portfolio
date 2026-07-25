@@ -14,6 +14,74 @@
 
 ---
 
+## Free RAG AI Assistant Setup
+
+This portfolio includes a floating AI assistant that keeps GitHub Pages free and uses a free Cloudflare Worker to hide API keys.
+
+### Architecture
+
+- **Frontend:** `ai-chat.js` adds the floating chat widget to the static GitHub Pages site.
+- **API layer:** `worker/src/index.js` runs on Cloudflare Workers and exposes `POST /chat`.
+- **Vector store:** Qdrant Cloud stores portfolio knowledge chunks in the `mohith_portfolio` collection.
+- **Models:** Gemini creates embeddings with `gemini-embedding-001` and answers with `gemini-3.5-flash-lite`.
+- **Knowledge base:** Markdown files in `knowledge/` are embedded by `scripts/ingest-knowledge.js`.
+
+### 1. Create Free Accounts
+
+1. Create a Gemini API key in Google AI Studio.
+2. Create a free Qdrant Cloud cluster and API key.
+3. Create a free Cloudflare account for Workers.
+
+### 2. Ingest Portfolio Knowledge
+
+Update `knowledge/mohith.md` with resume, projects, skills, and bio details, then run:
+
+```powershell
+$env:GEMINI_API_KEY="your-gemini-api-key"
+$env:QDRANT_URL="https://your-qdrant-cluster-url"
+$env:QDRANT_API_KEY="your-qdrant-api-key"
+$env:QDRANT_COLLECTION="mohith_portfolio"
+npm run ingest:knowledge
+```
+
+### 3. Deploy the Cloudflare Worker
+
+```powershell
+cd worker
+Copy-Item wrangler.toml.example wrangler.toml
+npm install
+npx wrangler login
+npx wrangler secret put GEMINI_API_KEY
+npx wrangler secret put QDRANT_URL
+npx wrangler secret put QDRANT_API_KEY
+npx wrangler deploy
+```
+
+After deployment, Cloudflare prints a Worker URL such as:
+
+```text
+https://mohith-portfolio-ai.YOUR_SUBDOMAIN.workers.dev
+```
+
+### 4. Connect GitHub Pages to the Worker
+
+In `index.html`, replace the placeholder endpoint:
+
+```html
+<script src="ai-chat.js" data-endpoint="https://mohith-portfolio-ai.YOUR_SUBDOMAIN.workers.dev/chat"></script>
+```
+
+with the actual deployed Worker `/chat` URL. Keep the Gemini and Qdrant keys only in Cloudflare Worker secrets.
+
+### 5. Test Questions
+
+- Known: "What projects has Mohith built?"
+- Known: "What AI/ML skills does he have?"
+- Known: "How can I contact him?"
+- Unknown: "What is his GPA?" The assistant should say the portfolio does not mention that yet.
+
+---
+
 ## 📋 Table of Contents
 - [About](#about)
 - [Features](#features)

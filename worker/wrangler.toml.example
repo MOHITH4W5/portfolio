@@ -1,0 +1,15 @@
+name = "mohith-portfolio-ai"
+main = "src/index.js"
+compatibility_date = "2026-07-25"
+
+[vars]
+ALLOWED_ORIGIN = "https://mohith4w5.github.io"
+ALLOW_LOCALHOST = "true"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
+EMBEDDING_MODEL = "gemini-embedding-001"
+QDRANT_COLLECTION = "mohith_portfolio"
+
+# Optional abuse protection. Create a KV namespace, then uncomment and fill this.
+# [[kv_namespaces]]
+# binding = "RATE_LIMITER"
+# id = "your-kv-namespace-id"
