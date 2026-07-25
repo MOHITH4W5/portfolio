@@ -1,75 +1,51 @@
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+        const target = document.querySelector(anchor.getAttribute("href"));
+
+        if (!target) {
+            return;
         }
+
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        closeMenu();
     });
 });
 
-function add3DCardEffects() {
-    const cards = document.querySelectorAll('.skill-card, .project-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            card.style.transform = `translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
+const menuButton = document.getElementById("menuBtn");
+const siteNav = document.getElementById("siteNav");
+const projectRail = document.getElementById("projectRail");
 
+menuButton?.addEventListener("click", () => {
+    const isOpen = siteNav.classList.toggle("active");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+});
 
-
-async function init3DBackground() {
-    const { Application } = await import('https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js');
-    const canvas = document.getElementById('canvas3d');
-    const app = new Application(canvas);
-    await app.load('https://prod.spline.design/R73ukMpU1cz91-xF/scene.splinecode');
-    
-    setInterval(() => {
-        const logo = document.querySelector('div[style*="position: absolute"]');
-        if (logo && logo.textContent.includes('Spline')) {
-            logo.style.display = 'none';
-        }
-    }, 100);
-}
-
-function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    menu.classList.toggle('active');
-}
-
-window.addEventListener('DOMContentLoaded', function() {
-    add3DCardEffects();
-    init3DBackground();
-    
-    const menuBtn = document.getElementById('menuBtn');
-    if (menuBtn) {
-        menuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        });
-        menuBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        }, { passive: false });
+document.addEventListener("click", (event) => {
+    if (!siteNav || !menuButton) {
+        return;
     }
-    
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('dropdownMenu').classList.remove('active');
+
+    if (!siteNav.contains(event.target) && !menuButton.contains(event.target)) {
+        closeMenu();
+    }
+});
+
+document.querySelectorAll("[data-scroll]").forEach((button) => {
+    button.addEventListener("click", () => {
+        if (!projectRail) {
+            return;
+        }
+
+        const direction = button.dataset.scroll === "left" ? -1 : 1;
+        projectRail.scrollBy({
+            left: direction * Math.min(420, projectRail.clientWidth),
+            behavior: "smooth"
         });
     });
-    document.documentElement.setAttribute('data-theme', 'dark');
 });
+
+function closeMenu() {
+    siteNav?.classList.remove("active");
+    menuButton?.setAttribute("aria-expanded", "false");
+}

@@ -13,7 +13,6 @@
     widget.setAttribute("aria-label", "Mohith AI assistant");
     widget.innerHTML = `
         <button class="ai-chat__toggle" type="button" aria-expanded="false" aria-controls="aiChatPanel" title="Ask Mohith's AI">
-            <span aria-hidden="true">AI</span>
             <span class="ai-chat__toggle-label">Ask AI</span>
         </button>
         <div class="ai-chat__panel" id="aiChatPanel" aria-hidden="true">

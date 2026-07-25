@@ -1,113 +1,225 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohith - Portfolio</title>
-    <link rel="stylesheet" href="style.css?v=4">
-    <script type="module" src="https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js"></script>
+    <title>Mohith - AI/ML Portfolio</title>
+    <meta name="description" content="Mohith's AI/ML engineering portfolio featuring projects, skills, and contact details.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23171615'/%3E%3Ctext x='32' y='41' font-family='Arial,sans-serif' font-size='28' font-weight='800' text-anchor='middle' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
-    <canvas id="canvas3d"></canvas>
-    <div class="logo">Portfolio</div>
-    <button class="menu-btn" id="menuBtn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <nav class="dropdown-menu" id="dropdownMenu">
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#portfolio">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <header class="site-header">
+        <a class="brand" href="#home" aria-label="Mohith portfolio home">
+            <span class="brand-mark">M</span>
+            <span>Mohith</span>
+        </a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+            <a href="#journey">Journey</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Hi, I'm <span class="highlight">Mohith</span></h1>
-            <p class="tagline">Web Developer | Designer | Creator</p>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <img src="profile.jpg" alt="Profile" class="about-img">
-                <div class="about-text">
-                    <p>I'm a passionate developer with expertise in creating modern web applications. I love turning ideas into reality through code.</p>
-                    <p>With experience in full-stack development, I focus on building responsive and user-friendly applications.</p>
+    <main>
+        <section id="home" class="hero section-shell">
+            <div class="hero-copy">
+                <p class="eyebrow">AI/ML engineering student</p>
+                <h1>Hi, I'm Mohith. I like figuring things out with code and AI.</h1>
+                <p class="hero-lede">
+                    I build practical AI/ML experiments, web experiences, and tools that turn ideas into working products.
+                    My current focus is learning deeply, shipping consistently, and growing into a strong AI engineer.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-btn" href="#projects">View Projects</a>
+                    <a class="secondary-btn" href="mailto:mohithhj01@gmail.com">Contact Me</a>
                 </div>
             </div>
-        </div>
-    </section>
+            <aside class="hero-card" aria-label="Mohith profile summary">
+                <img src="profile.jpg" alt="Mohith profile photo" class="profile-photo">
+                <div>
+                    <p class="card-label">Based in</p>
+                    <p class="card-value">India</p>
+                </div>
+                <div>
+                    <p class="card-label">Currently</p>
+                    <p class="card-value">3rd year engineering, AI/ML</p>
+                </div>
+                <div>
+                    <p class="card-label">Building</p>
+                    <p class="card-value">ML projects, chatbots, web apps</p>
+                </div>
+            </aside>
+        </section>
 
-    <section id="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Frontend</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
+        <section id="journey" class="section-shell split-section">
+            <div>
+                <p class="eyebrow">My Journey</p>
+                <h2>Curious by default, practical by habit.</h2>
+            </div>
+            <div class="story-copy">
+                <p>
+                    I started with web development and kept following the interesting problems. That curiosity has pulled me
+                    toward AI/ML, backend systems, and product-style projects where the goal is not just to write code, but
+                    to make something useful.
+                </p>
+                <p>
+                    Right now, I am building and studying across machine learning, deep learning, chatbot fine-tuning, and
+                    modern web development. I enjoy taking rough ideas and shaping them into clean, usable experiences.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills" class="section-shell">
+            <div class="section-heading">
+                <p class="eyebrow">Tools I use</p>
+                <h2>Skills across AI, code, and design.</h2>
+            </div>
+            <div class="stack-groups">
+                <article class="stack-card">
+                    <h3>Use at work</h3>
+                    <div class="pill-row">
+                        <span>Python</span>
+                        <span>Machine Learning</span>
+                        <span>Deep Learning</span>
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Databases</span>
+                        <span>Git</span>
+                    </div>
+                </article>
+                <article class="stack-card">
+                    <h3>Use for fun</h3>
+                    <div class="pill-row">
+                        <span>AI Chatbots</span>
+                        <span>RAG</span>
+                        <span>Prompting</span>
+                        <span>Jupyter</span>
+                        <span>Figma</span>
+                        <span>UI/UX</span>
+                        <span>Cloudflare Workers</span>
+                        <span>GitHub Pages</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects" class="section-shell">
+            <div class="section-heading inline-heading">
+                <div>
+                    <p class="eyebrow">Featured Projects</p>
+                    <h2>Things I have been building.</h2>
                 </div>
-                <div class="skill-card">
-                    <h3>Backend</h3>
-                    <p>Node.js, Python, Databases</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Tools</h3>
-                    <p>Git, VS Code, Figma</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Other</h3>
-                    <p>UI/UX Design, Problem Solving</p>
+                <div class="rail-controls" aria-label="Project carousel controls">
+                    <button type="button" data-scroll="left" aria-label="Scroll projects left">‹</button>
+                    <button type="button" data-scroll="right" aria-label="Scroll projects right">›</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="portfolio">
-        <div class="container">
-            <h2>Projects</h2>
-<div class="projects-grid">
-<a href="https://github.com/MOHITH4W5/ml-projects" target="_blank" class="project-card-link">
-            <div class="project-card">
-        <div class="project-header">
-          <h3>ML Projects</h3>
-        </div>
-        <p class="project-description">A collection of machine learning projects exploring AI/ML applications, chatbot fine-tuning, and practical implementations.</p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">Machine Learning</span>
-          <span class="tag">AI</span>
-          <span class="tag">Deep Learning</span>
-          <span class="tag">Jupyter</span>
-        </div>
-      </div>
-      </a>
-    </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <div class="contact-links">
-                <a href="mailto:mohithhj01@gmail.com" class="contact-btn">Email</a>
-                <a href="https://github.com/MOHITH4W5" target="_blank" class="contact-btn">GitHub</a>
-                <a href="https://www.linkedin.com/in/mohith-hj-5b1208337" target="_blank" class="contact-btn">LinkedIn</a>
+            <div class="project-rail" id="projectRail">
+                <a href="https://github.com/MOHITH4W5/ml-projects" target="_blank" rel="noopener noreferrer" class="project-card featured-project">
+                    <span class="project-index">01</span>
+                    <h3>ML Projects</h3>
+                    <p class="project-type">Python - Machine Learning - AI</p>
+                    <p>
+                        A collection of machine learning projects exploring AI/ML applications, chatbot fine-tuning,
+                        deep learning experiments, and practical implementations.
+                    </p>
+                    <span class="learn-more">Learn more</span>
+                </a>
+                <article class="project-card">
+                    <span class="project-index">02</span>
+                    <h3>Portfolio AI Assistant</h3>
+                    <p class="project-type">RAG - Gemini - Qdrant - Cloudflare</p>
+                    <p>
+                        A free RAG assistant for this portfolio that answers questions from Mohith's knowledge base while
+                        keeping API keys hidden behind a Cloudflare Worker.
+                    </p>
+                    <span class="learn-more">Ask it live</span>
+                </article>
+                <article class="project-card">
+                    <span class="project-index">03</span>
+                    <h3>Web Portfolio</h3>
+                    <p class="project-type">HTML - CSS - JavaScript</p>
+                    <p>
+                        A fast static portfolio hosted on GitHub Pages, redesigned as a clean personal homepage with
+                        project highlights and direct contact links.
+                    </p>
+                    <span class="learn-more">You are here</span>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>&copy; 2024 Mohith. All rights reserved.</p>
+        <section id="experience" class="section-shell">
+            <div class="section-heading">
+                <p class="eyebrow">Experience</p>
+                <h2>Learning, shipping, improving.</h2>
+            </div>
+            <div class="timeline">
+                <article class="timeline-item">
+                    <div>
+                        <h3>AI/ML Engineering Student</h3>
+                        <p class="muted">3rd year - Current</p>
+                    </div>
+                    <p>
+                        Studying core engineering concepts while building a stronger foundation in machine learning,
+                        Python, deep learning, and AI-powered applications.
+                    </p>
+                </article>
+                <article class="timeline-item">
+                    <div>
+                        <h3>Developer & Builder</h3>
+                        <p class="muted">Portfolio projects</p>
+                    </div>
+                    <p>
+                        Building hands-on projects across frontend, backend, AI chatbots, and RAG systems to connect
+                        theory with real product workflows.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="section-shell contact-section">
+            <div>
+                <p class="eyebrow">Contact</p>
+                <h2>Want to connect?</h2>
+                <p class="contact-copy">
+                    Send a message, explore the GitHub work, or ask the AI assistant about Mohith's background.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:mohithhj01@gmail.com">Email</a>
+                    <a href="https://github.com/MOHITH4W5" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/mohith-hj-5b1208337" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+            </div>
+            <form class="terminal-card" action="mailto:mohithhj01@gmail.com" method="post" enctype="text/plain">
+                <div class="terminal-bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <label for="visitorName">To start, could you enter your name?</label>
+                <div class="terminal-input">
+                    <span>➜ ~</span>
+                    <input id="visitorName" name="name" type="text" placeholder="Enter name">
+                </div>
+                <button type="submit">Say hello</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Mohith. Built with curiosity, code, and a little AI.</p>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="ai-chat.js?v=2" data-endpoint="https://mohith-portfolio-ai.mohithhj.workers.dev/chat"></script>
+    <script src="script.js?v=2"></script>
+    <script src="ai-chat.js?v=3" data-endpoint="https://mohith-portfolio-ai.mohithhj.workers.dev/chat"></script>
 </body>
 </html>
