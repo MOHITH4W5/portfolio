@@ -5,6 +5,19 @@ const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY_ITEMS = 6;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_MAX_REQUESTS = 12;
+const FALLBACK_CONTEXT = [
+    "Source 1: Contact",
+    "URL: https://mohith4w5.github.io/portfolio#contact",
+    "Fact: Visitors can contact Mohith by email at mohithhj01@gmail.com or phone at 9187127070. His GitHub profile is https://github.com/MOHITH4W5. His LinkedIn profile is https://www.linkedin.com/in/mohith-hj-5b1208337. His Instagram profile is https://www.instagram.com/mohithhj/.",
+    "",
+    "Source 2: Profile",
+    "URL: https://mohith4w5.github.io/portfolio#home",
+    "Fact: Mohith is an AI/ML engineering student currently pursuing the third year of engineering. He builds practical AI/ML experiments, chatbots, web apps, and portfolio projects.",
+    "",
+    "Source 3: Projects",
+    "URL: https://github.com/MOHITH4W5/ml-projects",
+    "Fact: Mohith's featured project is ML Projects, a collection of machine learning projects exploring AI/ML applications, chatbot fine-tuning, and practical implementations."
+].join("\n");
 
 export default {
     async fetch(request, env) {
@@ -49,13 +62,12 @@ export default {
             requireEnv(env, ["GEMINI_API_KEY", "QDRANT_URL", "QDRANT_API_KEY"]);
 
             const history = normalizeHistory(payload.history);
-            const queryEmbedding = await embedText(message, env);
-            const matches = await searchQdrant(queryEmbedding, env);
-            const context = buildContext(matches);
+            const { matches, retrievalFailed } = await retrieveMatches(message, env);
+            const context = `${buildContext(matches)}\n\n${FALLBACK_CONTEXT}`;
             const answer = await generateAnswer(message, history, context, env);
-            const sources = buildSources(matches);
+            const sources = mergeSources(buildSources(matches), buildFallbackSources());
 
-            return json({ answer, sources }, 200, corsHeaders);
+            return json({ answer, sources: retrievalFailed ? buildFallbackSources() : sources }, 200, corsHeaders);
         } catch (error) {
             return json({ error: error.message || "The AI assistant failed to respond." }, 500, corsHeaders);
         }
@@ -74,6 +86,17 @@ function getCorsHeaders(origin, env) {
     }
 
     return headers;
+}
+
+async function retrieveMatches(message, env) {
+    try {
+        const queryEmbedding = await embedText(message, env);
+        const matches = await searchQdrant(queryEmbedding, env);
+        return { matches, retrievalFailed: false };
+    } catch (error) {
+        console.warn("Portfolio retrieval failed", error.message);
+        return { matches: [], retrievalFailed: true };
+    }
 }
 
 function isOriginAllowed(origin, env) {
@@ -139,7 +162,7 @@ async function embedText(text, env) {
         })
     });
 
-    const data = await response.json();
+    const data = await readJson(response, "Gemini embedding");
 
     if (!response.ok) {
         throw new Error(data.error?.message || "Gemini embedding request failed.");
@@ -170,7 +193,7 @@ async function searchQdrant(vector, env) {
         })
     });
 
-    const data = await response.json();
+    const data = await readJson(response, "Qdrant search");
 
     if (!response.ok) {
         throw new Error(data.status?.error || data.error || "Qdrant search failed.");
@@ -232,7 +255,7 @@ async function generateAnswer(message, history, context, env) {
         })
     });
 
-    const data = await response.json();
+    const data = await readJson(response, "Gemini answer");
 
     if (!response.ok) {
         throw new Error(data.error?.message || "Gemini answer request failed.");
@@ -267,6 +290,101 @@ function buildSources(matches) {
             title: payload.title || "Portfolio source",
             url: payload.url || "https://mohith4w5.github.io/portfolio"
         }));
+}
+
+function buildFallbackSources() {
+    return [
+        { title: "Portfolio contact", url: "https://mohith4w5.github.io/portfolio#contact" },
+        { title: "GitHub profile", url: "https://github.com/MOHITH4W5" },
+        { title: "LinkedIn profile", url: "https://www.linkedin.com/in/mohith-hj-5b1208337" },
+        { title: "Instagram profile", url: "https://www.instagram.com/mohithhj/" }
+    ];
+}
+
+function mergeSources(primary, fallback) {
+    const seen = new Set();
+    return [...primary, ...fallback]
+        .filter((source) => source && source.url)
+        .filter((source) => {
+            if (seen.has(source.url)) {
+                return false;
+            }
+
+            seen.add(source.url);
+            return true;
+        })
+        .slice(0, 3);
+}
+
+async function readJson(response, label) {
+    const text = await response.text();
+
+    if (!text.trim()) {
+        return {};
+    }
+
+    try {
+        return JSON.parse(text);
+    } catch (error) {
+        const extracted = extractFirstJsonObject(text);
+
+        if (extracted) {
+            try {
+                return JSON.parse(extracted);
+            } catch {
+                // Fall through to the clearer error below.
+            }
+        }
+
+        throw new Error(`${label} returned invalid JSON.`);
+    }
+}
+
+function extractFirstJsonObject(text) {
+    const start = text.indexOf("{");
+
+    if (start < 0) {
+        return "";
+    }
+
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+
+    for (let index = start; index < text.length; index += 1) {
+        const char = text[index];
+
+        if (escaped) {
+            escaped = false;
+            continue;
+        }
+
+        if (char === "\\") {
+            escaped = true;
+            continue;
+        }
+
+        if (char === "\"") {
+            inString = !inString;
+            continue;
+        }
+
+        if (inString) {
+            continue;
+        }
+
+        if (char === "{") {
+            depth += 1;
+        } else if (char === "}") {
+            depth -= 1;
+
+            if (depth === 0) {
+                return text.slice(start, index + 1);
+            }
+        }
+    }
+
+    return "";
 }
 
 function json(body, status, headers = {}) {

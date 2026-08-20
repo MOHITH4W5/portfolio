@@ -243,6 +243,10 @@
             return "I could not reach the AI backend. Please use the live GitHub Pages site or run a local server instead of opening index.html directly.";
         }
 
+        if (/json|provider|gemini|qdrant/i.test(message)) {
+            return "The AI backend had trouble reading a provider response. Please try again in a moment.";
+        }
+
         return message || "The AI assistant is unavailable right now. Please try again later.";
     }
 })();
