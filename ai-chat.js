@@ -13,17 +13,25 @@
     widget.setAttribute("aria-label", "Mohith AI assistant");
     widget.innerHTML = `
         <button class="ai-chat__toggle" type="button" aria-expanded="false" aria-controls="aiChatPanel" title="Ask Mohith's AI">
+            <span class="ai-robot" aria-hidden="true"></span>
             <span class="ai-chat__toggle-label">Ask AI</span>
         </button>
         <div class="ai-chat__panel" id="aiChatPanel" aria-hidden="true">
             <div class="ai-chat__header">
+                <span class="ai-chatbot-bot" aria-hidden="true"></span>
                 <div>
                     <p class="ai-chat__eyebrow">Portfolio assistant</p>
                     <h2>Ask about Mohith</h2>
                 </div>
                 <button class="ai-chat__close" type="button" aria-label="Close AI chat">x</button>
             </div>
+            <div class="ai-chat__orb" aria-hidden="true"></div>
             <div class="ai-chat__messages" role="log" aria-live="polite"></div>
+            <div class="ai-chat__suggestions" aria-label="Suggested questions">
+                <button type="button" data-question="What projects has Mohith built?">Projects</button>
+                <button type="button" data-question="What AI/ML skills does Mohith have?">AI/ML skills</button>
+                <button type="button" data-question="How can I contact Mohith?">Contact</button>
+            </div>
             <form class="ai-chat__form">
                 <label class="ai-chat__label" for="aiChatInput">Ask a question</label>
                 <div class="ai-chat__composer">
@@ -44,6 +52,7 @@
     const form = widget.querySelector(".ai-chat__form");
     const input = widget.querySelector(".ai-chat__input");
     const statusEl = widget.querySelector(".ai-chat__status");
+    const suggestions = widget.querySelectorAll("[data-question]");
 
     if (history.length === 0) {
         history.push({ role: "assistant", content: introMessage, sources: [] });
@@ -54,6 +63,13 @@
 
     toggleButton.addEventListener("click", () => setOpen(!widget.classList.contains("ai-chat--open")));
     closeButton.addEventListener("click", () => setOpen(false));
+
+    suggestions.forEach((button) => {
+        button.addEventListener("click", () => {
+            input.value = button.dataset.question || "";
+            form.requestSubmit();
+        });
+    });
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -83,6 +99,12 @@
         input.value = "";
         setLoading(true);
         setStatus("Thinking...");
+        const typingMessage = addMessage({
+            role: "assistant",
+            content: "",
+            sources: [],
+            typing: true
+        });
 
         try {
             const response = await fetch(endpoint, {
@@ -103,6 +125,7 @@
                 throw new Error(data.error || "The AI assistant is unavailable right now.");
             }
 
+            removeMessage(typingMessage.id);
             addMessage({
                 role: "assistant",
                 content: data.answer || "I could not find that in Mohith's portfolio knowledge base yet.",
@@ -110,9 +133,10 @@
             });
             setStatus("");
         } catch (error) {
+            removeMessage(typingMessage.id);
             addMessage({
                 role: "assistant",
-                content: error.message || "The AI assistant is unavailable right now. Please try again later.",
+                content: getFriendlyError(error),
                 sources: []
             });
             setStatus("");
@@ -133,8 +157,19 @@
     }
 
     function addMessage(message) {
-        history.push(message);
+        const nextMessage = {
+            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+            ...message
+        };
+        history.push(nextMessage);
         history = history.slice(-12);
+        saveHistory();
+        renderMessages();
+        return nextMessage;
+    }
+
+    function removeMessage(id) {
+        history = history.filter((message) => message.id !== id);
         saveHistory();
         renderMessages();
     }
@@ -146,9 +181,16 @@
             const bubble = document.createElement("article");
             bubble.className = `ai-chat__message ai-chat__message--${message.role}`;
 
-            const text = document.createElement("p");
-            text.textContent = message.content;
-            bubble.appendChild(text);
+            if (message.typing) {
+                const typing = document.createElement("div");
+                typing.className = "ai-chat__typing";
+                typing.innerHTML = "<span></span><span></span><span></span>";
+                bubble.appendChild(typing);
+            } else {
+                const text = document.createElement("p");
+                text.textContent = message.content;
+                bubble.appendChild(text);
+            }
 
             if (message.sources && message.sources.length > 0) {
                 const sources = document.createElement("div");
@@ -190,6 +232,17 @@
     }
 
     function saveHistory() {
-        sessionStorage.setItem(storageKey, JSON.stringify(history));
+        const serializable = history.filter((message) => !message.typing);
+        sessionStorage.setItem(storageKey, JSON.stringify(serializable));
+    }
+
+    function getFriendlyError(error) {
+        const message = error.message || "";
+
+        if (message === "Failed to fetch") {
+            return "I could not reach the AI backend. Please use the live GitHub Pages site or run a local server instead of opening index.html directly.";
+        }
+
+        return message || "The AI assistant is unavailable right now. Please try again later.";
     }
 })();

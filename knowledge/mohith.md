@@ -16,7 +16,7 @@ Mohith is pursuing engineering in AI/ML. His portfolio and README highlight inte
 Mohith's featured project is ML Projects, available at https://github.com/MOHITH4W5/ml-projects. It is described as a collection of machine learning projects exploring AI/ML applications, chatbot fine-tuning, and practical implementations. The project tags include Python, Machine Learning, AI, Deep Learning, and Jupyter.
 
 ## Contact
-Visitors can contact Mohith by email at mohithhj01@gmail.com. His GitHub profile is https://github.com/MOHITH4W5. His LinkedIn profile is https://www.linkedin.com/in/mohith-hj-5b1208337.
+Visitors can contact Mohith by email at mohithhj01@gmail.com or phone at 9187127070. His GitHub profile is https://github.com/MOHITH4W5. His LinkedIn profile is https://www.linkedin.com/in/mohith-hj-5b1208337. His Instagram profile is https://www.instagram.com/mohithhj/.
 
 ## Answering Rules
 If a visitor asks about information not listed in this knowledge base, the assistant should say the portfolio does not mention that yet and suggest contacting Mohith. The assistant should not invent GPA, grades, internships, employment history, certificates, awards, or private personal details.

@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohith - AI/ML Portfolio</title>
-    <meta name="description" content="Mohith's AI/ML engineering portfolio featuring projects, skills, and contact details.">
+    <meta name="description" content="Mohith's AI/ML engineering portfolio featuring projects, skills, social links, and an AI assistant.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23171615'/%3E%3Ctext x='32' y='41' font-family='Arial,sans-serif' font-size='28' font-weight='800' text-anchor='middle' fill='white'%3EM%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
+    <canvas id="bg3d" class="bg3d" aria-hidden="true"></canvas>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
     <header class="site-header">
         <a class="brand" href="#home" aria-label="Mohith portfolio home">
             <span class="brand-mark">M</span>
             <span>Mohith</span>
         </a>
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+                <span class="theme-toggle__track">
+                    <span class="theme-toggle__thumb"></span>
+                </span>
+                <span class="theme-toggle__text">Light</span>
+            </button>
+            <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
         <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
             <a href="#journey">Journey</a>
+            <a href="#socials">Data</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#experience">Experience</a>
@@ -30,19 +42,19 @@
 
     <main>
         <section id="home" class="hero section-shell">
-            <div class="hero-copy">
+            <div class="hero-copy reveal">
                 <p class="eyebrow">AI/ML engineering student</p>
-                <h1>Hi, I'm Mohith. I like figuring things out with code and AI.</h1>
+                <h1>Hi, I'm Mohith. I build AI experiments with real product energy.</h1>
                 <p class="hero-lede">
-                    I build practical AI/ML experiments, web experiences, and tools that turn ideas into working products.
-                    My current focus is learning deeply, shipping consistently, and growing into a strong AI engineer.
+                    I work across machine learning, web development, and AI assistants. This portfolio now includes an
+                    interactive background, live GitHub data, social links, and a RAG-powered assistant you can ask about me.
                 </p>
                 <div class="hero-actions">
-                    <a class="primary-btn" href="#projects">View Projects</a>
-                    <a class="secondary-btn" href="mailto:mohithhj01@gmail.com">Contact Me</a>
+                    <a class="primary-btn magnetic" href="#projects">View Projects</a>
+                    <button class="secondary-btn magnetic" type="button" data-open-ai>Ask My AI</button>
                 </div>
             </div>
-            <aside class="hero-card" aria-label="Mohith profile summary">
+            <aside class="hero-card tilt-card reveal" aria-label="Mohith profile summary">
                 <img src="profile.jpg" alt="Mohith profile photo" class="profile-photo">
                 <div>
                     <p class="card-label">Based in</p>
@@ -59,7 +71,7 @@
             </aside>
         </section>
 
-        <section id="journey" class="section-shell split-section">
+        <section id="journey" class="section-shell split-section reveal">
             <div>
                 <p class="eyebrow">My Journey</p>
                 <h2>Curious by default, practical by habit.</h2>
@@ -77,13 +89,52 @@
             </div>
         </section>
 
-        <section id="skills" class="section-shell">
+        <section id="socials" class="section-shell reveal">
+            <div class="section-heading inline-heading">
+                <div>
+                    <p class="eyebrow">Live data and links</p>
+                    <h2>Find me across the web.</h2>
+                </div>
+                <p class="section-note">GitHub stats load live when available. LinkedIn and Instagram open my public profiles.</p>
+            </div>
+            <div class="social-grid">
+                <a class="social-card tilt-card" href="https://github.com/MOHITH4W5" target="_blank" rel="noopener noreferrer">
+                    <span class="social-icon">GH</span>
+                    <h3>GitHub</h3>
+                    <p id="githubBio">Loading GitHub profile...</p>
+                    <dl class="github-stats" aria-label="GitHub stats">
+                        <div>
+                            <dt>Repos</dt>
+                            <dd id="githubRepos">--</dd>
+                        </div>
+                        <div>
+                            <dt>Followers</dt>
+                            <dd id="githubFollowers">--</dd>
+                        </div>
+                    </dl>
+                </a>
+                <a class="social-card tilt-card" href="https://www.linkedin.com/in/mohith-hj-5b1208337" target="_blank" rel="noopener noreferrer">
+                    <span class="social-icon">IN</span>
+                    <h3>LinkedIn</h3>
+                    <p>Connect with Mohith for AI/ML learning, projects, collaborations, and professional updates.</p>
+                    <span class="learn-more">Open LinkedIn</span>
+                </a>
+                <a class="social-card tilt-card" href="https://www.instagram.com/mohithhj/" target="_blank" rel="noopener noreferrer">
+                    <span class="social-icon">IG</span>
+                    <h3>Instagram</h3>
+                    <p>Follow Mohith's personal updates and creative side outside the code editor.</p>
+                    <span class="learn-more">Open Instagram</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="skills" class="section-shell reveal">
             <div class="section-heading">
                 <p class="eyebrow">Tools I use</p>
                 <h2>Skills across AI, code, and design.</h2>
             </div>
             <div class="stack-groups">
-                <article class="stack-card">
+                <article class="stack-card tilt-card">
                     <h3>Use at work</h3>
                     <div class="pill-row">
                         <span>Python</span>
@@ -96,7 +147,7 @@
                         <span>Git</span>
                     </div>
                 </article>
-                <article class="stack-card">
+                <article class="stack-card tilt-card">
                     <h3>Use for fun</h3>
                     <div class="pill-row">
                         <span>AI Chatbots</span>
@@ -112,19 +163,19 @@
             </div>
         </section>
 
-        <section id="projects" class="section-shell">
+        <section id="projects" class="section-shell reveal">
             <div class="section-heading inline-heading">
                 <div>
                     <p class="eyebrow">Featured Projects</p>
                     <h2>Things I have been building.</h2>
                 </div>
                 <div class="rail-controls" aria-label="Project carousel controls">
-                    <button type="button" data-scroll="left" aria-label="Scroll projects left">‹</button>
-                    <button type="button" data-scroll="right" aria-label="Scroll projects right">›</button>
+                    <button type="button" data-scroll="left" aria-label="Scroll projects left">&lt;</button>
+                    <button type="button" data-scroll="right" aria-label="Scroll projects right">&gt;</button>
                 </div>
             </div>
             <div class="project-rail" id="projectRail">
-                <a href="https://github.com/MOHITH4W5/ml-projects" target="_blank" rel="noopener noreferrer" class="project-card featured-project">
+                <a href="https://github.com/MOHITH4W5/ml-projects" target="_blank" rel="noopener noreferrer" class="project-card featured-project tilt-card">
                     <span class="project-index">01</span>
                     <h3>ML Projects</h3>
                     <p class="project-type">Python - Machine Learning - AI</p>
@@ -134,7 +185,7 @@
                     </p>
                     <span class="learn-more">Learn more</span>
                 </a>
-                <article class="project-card">
+                <article class="project-card tilt-card">
                     <span class="project-index">02</span>
                     <h3>Portfolio AI Assistant</h3>
                     <p class="project-type">RAG - Gemini - Qdrant - Cloudflare</p>
@@ -142,28 +193,28 @@
                         A free RAG assistant for this portfolio that answers questions from Mohith's knowledge base while
                         keeping API keys hidden behind a Cloudflare Worker.
                     </p>
-                    <span class="learn-more">Ask it live</span>
+                    <button class="text-button" type="button" data-open-ai>Ask it live</button>
                 </article>
-                <article class="project-card">
+                <article class="project-card tilt-card">
                     <span class="project-index">03</span>
-                    <h3>Web Portfolio</h3>
-                    <p class="project-type">HTML - CSS - JavaScript</p>
+                    <h3>Interactive Portfolio</h3>
+                    <p class="project-type">Three.js - HTML - CSS - JavaScript</p>
                     <p>
-                        A fast static portfolio hosted on GitHub Pages, redesigned as a clean personal homepage with
-                        project highlights and direct contact links.
+                        A fast static portfolio hosted on GitHub Pages with theme switching, live profile data,
+                        interactive motion, and lightweight 3D background effects.
                     </p>
                     <span class="learn-more">You are here</span>
                 </article>
             </div>
         </section>
 
-        <section id="experience" class="section-shell">
+        <section id="experience" class="section-shell reveal">
             <div class="section-heading">
                 <p class="eyebrow">Experience</p>
                 <h2>Learning, shipping, improving.</h2>
             </div>
             <div class="timeline">
-                <article class="timeline-item">
+                <article class="timeline-item tilt-card">
                     <div>
                         <h3>AI/ML Engineering Student</h3>
                         <p class="muted">3rd year - Current</p>
@@ -173,9 +224,9 @@
                         Python, deep learning, and AI-powered applications.
                     </p>
                 </article>
-                <article class="timeline-item">
+                <article class="timeline-item tilt-card">
                     <div>
-                        <h3>Developer & Builder</h3>
+                        <h3>Developer and Builder</h3>
                         <p class="muted">Portfolio projects</p>
                     </div>
                     <p>
@@ -186,20 +237,22 @@
             </div>
         </section>
 
-        <section id="contact" class="section-shell contact-section">
+        <section id="contact" class="section-shell contact-section reveal">
             <div>
                 <p class="eyebrow">Contact</p>
                 <h2>Want to connect?</h2>
                 <p class="contact-copy">
-                    Send a message, explore the GitHub work, or ask the AI assistant about Mohith's background.
+                    Send a message, call directly, explore the GitHub work, or ask the AI assistant about Mohith's background.
                 </p>
                 <div class="contact-links">
                     <a href="mailto:mohithhj01@gmail.com">Email</a>
+                    <a href="tel:+919187127070">Call: 9187127070</a>
                     <a href="https://github.com/MOHITH4W5" target="_blank" rel="noopener noreferrer">GitHub</a>
                     <a href="https://www.linkedin.com/in/mohith-hj-5b1208337" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://www.instagram.com/mohithhj/" target="_blank" rel="noopener noreferrer">Instagram</a>
                 </div>
             </div>
-            <form class="terminal-card" action="mailto:mohithhj01@gmail.com" method="post" enctype="text/plain">
+            <div class="terminal-card tilt-card">
                 <div class="terminal-bar">
                     <span></span>
                     <span></span>
@@ -207,19 +260,23 @@
                 </div>
                 <label for="visitorName">To start, could you enter your name?</label>
                 <div class="terminal-input">
-                    <span>➜ ~</span>
+                    <span>&gt; ~</span>
                     <input id="visitorName" name="name" type="text" placeholder="Enter name">
                 </div>
-                <button type="submit">Say hello</button>
-            </form>
+                <div class="terminal-actions">
+                    <a class="terminal-action" id="sayHelloLink" href="mailto:mohithhj01@gmail.com?subject=Portfolio%20hello">Say hello</a>
+                    <button type="button" data-copy-phone>Copy number</button>
+                </div>
+                <p class="terminal-status" id="terminalStatus" aria-live="polite"></p>
+            </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <p>© 2026 Mohith. Built with curiosity, code, and a little AI.</p>
+        <p>&copy; 2026 Mohith. Built with curiosity, code, and a little AI.</p>
     </footer>
 
-    <script src="script.js?v=2"></script>
-    <script src="ai-chat.js?v=3" data-endpoint="https://mohith-portfolio-ai.mohithhj.workers.dev/chat"></script>
+    <script type="module" src="script.js?v=4"></script>
+    <script src="ai-chat.js?v=4" data-endpoint="https://mohith-portfolio-ai.mohithhj.workers.dev/chat"></script>
 </body>
 </html>
